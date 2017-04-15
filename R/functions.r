@@ -21,3 +21,21 @@ columnmean <- function(x, removeNA = true) {
   means
 }
 
+embedprint <- function() {
+  fun <- function() {
+    print("Hello")
+  }
+  fun()
+}
+
+y <- 10
+
+f <- function(x) {
+  y <- 2
+  g(x)
+}
+
+g <- function(x) {
+  y
+}
+
