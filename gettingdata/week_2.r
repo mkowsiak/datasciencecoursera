@@ -1,3 +1,4 @@
+# MySQL
 # install only once
 # install.packages("RMySQL")
 
@@ -55,3 +56,29 @@ read_a
 
 h5write(c(12,13,14), "example.h5", "foo/A", index=list(1:3, 1))
 h5read("example.h5", "foo/A")
+
+# webscapring
+con = url("http://scholar.google.com/citations?user=HI-I6C0AAAAJ&hl=en")
+htmlCode = readLines(con)
+close(con)
+htmlCode
+
+# using package XML
+
+install.packages("XML")
+library(XML)
+
+url <- "http://scholar.google.com/citations?user=HI-I6C0AAAAJ&hl=en"
+html <- htmlTreeParse(url, useInternalNodes=T)
+xpathSApply(html,"//title",xmlValue)
+
+# using package httr
+
+install.packages("httr")
+library(httr)
+
+html2 = GET(url)
+content2 = content(html2, as="text")
+parsedHtml = htmlParse(content2, asText = TRUE)
+xpathSApply(parsedHtml, "//title", xmlValue)
+
